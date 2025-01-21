@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 df=pd.read_csv("real_estate_dataset.csv")
 print(df.columns)
 n_samples,n_features=df.shape
@@ -159,3 +160,35 @@ np.savetxt("coefs_eig.csv",coefs_eig,delimiter=",")
 # Check if the coefs_eig is the same as coefs_qr
 is_same=np.allclose(coefs_eig,coeffs_qr)
 print("Are the coefficients the same eig and qr?",is_same)
+
+# Vis psuedo inverse
+coeffs_svd_pinv=np.linalg.pinv(X)@y
+np.savetxt("coeffs_svd_pinv.csv",coeffs_svd_pinv,delimiter=",")
+is_same=np.allclose(coeffs_svd_pinv,coefs_svd)
+print("Are the coefficients the same svd and pinv?",is_same)
+
+# Let's plot the data on X[:,1] vs y-axis
+plt.scatter(X[:,1],y)
+plt.xlabel("Square Feet")
+plt.ylabel("Price")
+plt.title("Price vs Square Feet")
+plt.show()
+plt.savefig("Price_vs_Square_Feet.png")
+# Also plot a regression line with only X{:,0] and X[:,1]
+# FIrst make x[:,1] as np.arange between min and max of X[:,1]
+# Then calculate the predictions using the coefficients
+
+# USe X as only square feet
+X=df[["Square_Feet"]].values
+y=df["Price"].values
+# Add column of ones to X
+X=np.hstack((np.ones((n_samples,1)),X))
+coefs_1=np.linalg.inv(X.T@X)@X.T@y
+X_features=np.arange(np.min(X[:,1]),np.max(X[:,1]),1)
+X_features=np.hstack((np.ones((X_features.shape[0],1)),X_features.reshape(-1,1)))
+plt.scatter(X[:,1],y)
+plt.plot(X_features[:,1],X_features@coefs_1,color="red")
+plt.xlabel("Square Feet")
+plt.ylabel("Price")
+plt.show()
+plt.savefig("Price_vs_Square_Feet_Line.png")
