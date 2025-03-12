@@ -1,0 +1,26 @@
+Coal-fired power plants convert the chemical energy in coal to electrical energy through combustion. 
+
+The efficiency of this conversion depends on various operational parameters, including the coal-to-air ratio, combustion temperature, steam pressure, 
+and coal properties (sulphur content, water content). Optimizing these parameters can significantly improve plant efficiency and reduce operational costs.
+
+**Part 1: Develop an Explicit Function of Efficiency**
+- Use provided data of coal-to-air ratio, combustion temperature, steam pressure, coal properties, and corresponding efficiency.
+- The relationship between efficiency and these variables is quadratic (as per Claude Sonnet 3.7).
+- Implement:
+    - Batch gradient descent
+    - Mini-batch gradient descent
+    - Mini-batch ADAM
+- Visualize the objective function and solution path for all three methods.
+- Explain the convergence behavior for different batch sizes in the two mini-batch algorithms.
+
+**Part 2: Unconstrained Optimization Problem**
+- Use the function derived in Part 1 to find optimal operational parameters.
+- Allow the end user to choose any solution method from Part 1.
+- Implement:
+    - Newton with exact line search
+    - BFGS
+    - Conjugate gradient
+- Visualize the objective function and solution path.
+- Explain the convergence behavior.
+
+**Note:** Be creative with visualizations to convey maximum information with minimum plots.
