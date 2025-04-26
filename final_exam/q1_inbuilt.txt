@@ -1,0 +1,88 @@
+Welcome to the CBC MILP Solver 
+Version: 2.10.3 
+Build Date: Dec 15 2019 
+
+command line - /home/harshit/anaconda3/envs/ml/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/7cb7be57996546458a7e4d2240a7f428-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /tmp/7cb7be57996546458a7e4d2240a7f428-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 24 COLUMNS
+At line 103 RHS
+At line 123 BOUNDS
+At line 125 ENDATA
+Problem MODEL has 19 rows, 35 columns and 77 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 13 (-6) rows, 29 (-6) columns and 69 (-8) elements
+Perturbing problem by 0.001% of 3.8464207 - largest nonzero change 4.6390231e-05 ( 0.0082892611%) - largest zero change 4.510326e-05
+0  Obj -0.034716429 Primal inf 28177.196 (9) Dual inf 3.8464183 (1)
+0  Obj -0 Primal inf 28177.196 (9) Dual inf 7.8880719e+11 (14)
+18  Obj 457.85684
+Optimal - objective value 457.85684
+After Postsolve, objective 457.85684, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 457.8568432 - 18 iterations time 0.002, Presolve 0.00
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
+
+Status: Optimal
+
+Optimal Solution:
+2-Year Loan (L): 597.51
+
+Quarter 1:
+Total Money (x_1): 597.51
+Cash Flow (c_1): 100.00
+Investment (i_1): 497.51
+6-Month Loan (j_1): 0.00
+Quarterly Loan (k_1): 0.00
+
+Quarter 2:
+Total Money (x_2): 500.00
+Cash Flow (c_2): 500.00
+Investment (i_2): 0.00
+6-Month Loan (j_2): 0.00
+Quarterly Loan (k_2): 0.00
+
+Quarter 3:
+Total Money (x_3): 100.00
+Cash Flow (c_3): 100.00
+Investment (i_3): 0.00
+6-Month Loan (j_3): 100.00
+Quarterly Loan (k_3): 0.00
+
+Quarter 4:
+Total Money (x_4): 0.00
+Cash Flow (c_4): -600.00
+Investment (i_4): 0.00
+6-Month Loan (j_4): 0.00
+Quarterly Loan (k_4): 0.00
+
+Quarter 5:
+Total Money (x_5): 496.37
+Cash Flow (c_5): -500.00
+Investment (i_5): 496.37
+6-Month Loan (j_5): 0.00
+Quarterly Loan (k_5): 0.00
+
+Quarter 6:
+Total Money (x_6): 998.85
+Cash Flow (c_6): 200.00
+Investment (i_6): 798.85
+6-Month Loan (j_6): 0.00
+Quarterly Loan (k_6): 0.00
+
+Quarter 7:
+Total Money (x_7): 802.84
+Cash Flow (c_7): 600.00
+Investment (i_7): 202.84
+6-Month Loan (j_7): 0.00
+Quarterly Loan (k_7): 0.00
+
+Quarter 8:
+Total Money (x_8): 203.86
+Cash Flow (c_8): -900.00
+Investment (i_8): 203.86
+6-Month Loan (j_8): 0.00
+Quarterly Loan (k_8): 0.00
+
+Total Money at Q9 (x_9): 1104.88
+Final Return (r): 457.86
