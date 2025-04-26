@@ -1,0 +1,6 @@
+Total points evaluated including rejected samples: 5786
+Path length: 1280
+Final point: [0.99979662 0.99898558]
+Function value at final point: 3.697094778095517e-05
+Average path length over 10 runs: 1277.8
+Average total points evaluated over 10 runs: 5883.4

@@ -92,7 +92,7 @@ plt.show()
 
 avg_path_length = 0
 avg_total_points = 0
-for test_seed in range(10):
+for test_seed in range(1,11):
     np.random.seed(test_seed)
     x0 = np.array([-1.0,-1.0])
     path,total_steps = full_optimization(x0, sigma=0.01, innovation_threshold=0.2, max_iter=10000, tol=1e-4)
