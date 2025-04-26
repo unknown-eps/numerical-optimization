@@ -20,6 +20,75 @@ cash_flow = [100, 500, 100, -600, -500, 200, 600, -900]
 # The number of constraints are 17 without counting the non-negativity constraints.
 
 
+def simplex_iteration(A, b, c, basic_vars, tol=1e-8,xb=None):
+    '''
+    Perform one iteration of the simplex algorithm.
+    A: Coefficient matrix
+    b: Right-hand side vector
+    c: Cost vector
+    basic_vars: Indices of basic variables
+    tol: Tolerance for numerical stability
+    Returns:
+    Returns the function value for the choice of the basic variables,new values of the basic variables ,new basic variables and True if the solution is optimal, False otherwise.
+
+    '''
+    m, n = A.shape
+    non_basic_vars = [temp for temp in range(n) if temp not in basic_vars]
+    B = A[:, basic_vars]
+    NB = A[:, non_basic_vars]
+    if xb is None:
+        xb = np.linalg.solve(B,b) # Since this is the first time we explicitly solve the system of equations
+    lamb = np.linalg.solve(B.T, c[basic_vars])
+    s_nb = c[non_basic_vars] - NB.T @ lamb
+    if np.all(s_nb >= -tol):
+        return np.dot(c[basic_vars], xb),xb,basic_vars, True
+    
+    # According to Bland's rule, select the smallest index variable with negative reduced cost
+    entering_idx = None
+    for i, j in enumerate(non_basic_vars):
+        if s_nb[i] < -tol:
+            entering_idx = i
+            break  # Take the first negative reduced cost variable (smallest index)
+    
+    # Calculate direction
+    d = np.linalg.solve(B, NB[:, entering_idx])
+    
+    # Check if unbounded
+    if np.all(d <= tol):
+        raise Exception("Problem is unbounded")
+    
+    # Find the leaving variable according to Bland's rule (minimum ratio test)
+    min_ratio = float('inf')
+    leaving_idx = None
+    for i in range(m):
+        if d[i] > tol:
+            ratio = xb[i] / d[i]
+            if ratio < min_ratio or (abs(ratio - min_ratio) < tol and basic_vars[i] < basic_vars[leaving_idx]):
+                min_ratio = ratio
+                leaving_idx = i
+    
+    # Update the basic variables
+    # Update the basic variables
+    new_xb = xb.copy()
+    for i in range(m):
+        if i == leaving_idx:
+            new_xb[i] = min_ratio
+        else:
+            new_xb[i] = xb[i] - d[i] * min_ratio
+    entering_var = non_basic_vars[entering_idx]
+    new_basic_vars = basic_vars.copy()
+    new_basic_vars[leaving_idx] = entering_var
+    
+    # sort the basic variables
+    combined = list(zip(new_basic_vars, new_xb))
+    combined.sort(key=lambda x: x[0])  # Sort by basic variable index
+    new_basic_vars_sorted = [var for var, _ in combined]
+    new_xb_sorted = [val for _, val in combined]
+    return np.dot(c[basic_vars], xb), new_xb_sorted, new_basic_vars_sorted, False
+
+
+
+
 
 def direct_solve(A, b, c):
     A = A.copy()
@@ -109,10 +178,23 @@ c = np.zeros(33)
 c[L_start_idx] = +L_REPAY_FACTOR
 c[X_START_IDX + 8] = -1
 
+## Direct solve via scipy
 solution_by_direct_solve, obj_val, res = direct_solve(A, b, c)
 print(f"Solution by direct solve has the optimal value: {obj_val:.2f}")
 
+## Getting an initial basic feasible solution
 basic_vars, res = find_basic_vars_explicit(A, b)
 print(f"Basic variables: {basic_vars}")
-print(f"len(basic_vars): {len(basic_vars)}")
 basic_vars.append(31) # This was chosen through hit and trial so that the matrix is full rank 
+
+max_iter = 10
+
+for i in range(max_iter):
+    print(f"Iteration {i+1}")
+    obj_val, xb, basic_vars, is_optimal = simplex_iteration(A, b, c, basic_vars)
+    print(f"Objective value: {obj_val:.2f}")
+    print(f"Basic variables: {basic_vars}")
+    print(f"xb: {xb}")
+    print("\n***Next iteration*** \n")
+    if is_optimal:
+        break
