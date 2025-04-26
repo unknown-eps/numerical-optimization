@@ -3,7 +3,7 @@ import pulp
 # Assumptions
 # - We pay compound interest with the principal at the end of the loan term
 # - We cannot take a 6 month loan at the beginning of the 8th quarter as this will be repayed after the ninth quarter
-# - If the cashflow is negative(we earn money) for a quarter it cannot be invested in the same quarter
+# - If the cashflow is negative(we earn money) for a quarter it can be invested in the same quarter
 
 ## Variables
 # x_t: Total money at the start of quarter t after all loans have also been taken.  
@@ -30,11 +30,8 @@ L_REPAY_FACTOR = (1+0.01)**8  # Repayment factor for 2-year loan
 # L >= 0   (Two-year loan taken at start of quarter 1)
 
 # Investment and Cash Flow constraints
-# x_t >= i_t for t = 1 to 8 (Cannot invest more than available cash)
-# x_t - i_t >= c_t for t = 1 to 8 (Cash after investment must cover net cash flow)
-# Note: If c_t is positive (inflow), this means x_t - i_t >= c_t.
-# If c_t is negative (outflow), e.g. c_1 = -100, this means x_t - i_t >= -100,
-# or x_t - i_t + 100 >= 0, meaning cash after investment plus the absolute outflow must be non-negative.
+# x_t - i_t = c_t for t = 1 to 8 (Cash after investment must cover net cash flow if ct is negative additional 
+# cash flow can be invested in the same quarter)
 
 # Quarter-specific constraints (Balance Equations)
 # Let x[t], i[t], j[t], k[t] represent the variables for quarter t.
@@ -111,10 +108,7 @@ lpp += j[8] == 0, "No_6month_Loan_Q8"
 
 # Investment constraints: can't invest more than what we have after meeting cash requirements
 for t in quarters:
-    if cash_flow[t] >=0:
-        lpp += x[t] - i[t] == cash_flow[t], f"Cash_Flow_Requirement_Q{t}"
-    else:
-        lpp += i[t] == x[t], f"Investment_Limit_Q{t}"
+    lpp += x[t] - i[t] == cash_flow[t], f"Cash_Flow_Requirement_Q{t}"
 
 # Solve the problem
 lpp.solve()

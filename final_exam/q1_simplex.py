@@ -101,14 +101,9 @@ for idx in range(9, 17):
     t = idx - 9
     cur_i_idx = t + I_START_IDX
     cur_x_idx = t + X_START_IDX
-    if cash_flow[t] >=0:
-        A[idx, cur_x_idx] = 1
-        A[idx, cur_i_idx] = -1
-        b[idx] = cash_flow[t]
-    else:
-        A[idx, cur_x_idx] = 1
-        A[idx, cur_i_idx] = -1
-        b[idx] = 0
+    A[idx, cur_x_idx] = 1
+    A[idx, cur_i_idx] = -1
+    b[idx] = cash_flow[t]
 print(f"Rank of the matrix A: {np.linalg.matrix_rank(A)}") # Rank of the matrix A: 17 Full row rank
 c = np.zeros(33)
 c[L_start_idx] = +L_REPAY_FACTOR
@@ -119,3 +114,9 @@ print(f"Solution by direct solve has the optimal value: {obj_val:.2f}")
 
 basic_vars, res = find_basic_vars_explicit(A, b)
 print(f"Basic variables: {basic_vars}")
+print(f"len(basic_vars): {len(basic_vars)}")
+basic_vars.append(31)
+B = A[:, basic_vars]
+print(f"Rank of the matrix B: {np.linalg.matrix_rank(B)}") # Rank of the matrix B: 17 Full row rank
+xb = np.linalg.solve(B, b)
+print(f"xb: {xb}")

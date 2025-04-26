@@ -2,7 +2,7 @@ Welcome to the CBC MILP Solver
 Version: 2.10.3 
 Build Date: Dec 15 2019 
 
-command line - /home/harshit/anaconda3/envs/ml/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/1ac58ba41bed402d82f7247c47b0b260-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /tmp/1ac58ba41bed402d82f7247c47b0b260-pulp.sol (default strategy 1)
+command line - /home/harshit/anaconda3/envs/ml/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/474c688f58fc4ec49a20611cebe97dc7-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /tmp/474c688f58fc4ec49a20611cebe97dc7-pulp.sol (default strategy 1)
 At line 2 NAME          MODEL
 At line 3 ROWS
 At line 24 COLUMNS
@@ -14,12 +14,12 @@ Coin0008I MODEL read with 0 errors
 Option for timeMode changed from cpu to elapsed
 Presolve 9 (-10) rows, 25 (-10) columns and 48 (-29) elements
 Perturbing problem by 0.001% of 1.0828567 - largest nonzero change 9.4873205e-07 ( 8.7613813e-05%) - largest zero change 8.6522632e-07
-0  Obj -0 Primal inf 3100 (7) Dual inf 0.99999815 (1)
-0  Obj -0 Primal inf 3100 (7) Dual inf 1.4198972e+11 (14)
-14  Obj 457.85684
-Optimal - objective value 457.85684
-After Postsolve, objective 457.85684, infeasibilities - dual 0 (0), primal 0 (0)
-Optimal objective 457.8568432 - 14 iterations time 0.002, Presolve 0.00
+0  Obj -0.0012906484 Primal inf 3110 (7) Dual inf 0.99999815 (1)
+0  Obj -0 Primal inf 3110 (7) Dual inf 1.4198972e+11 (14)
+14  Obj 467.95498
+Optimal - objective value 467.95498
+After Postsolve, objective 467.95498, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 467.9549825 - 14 iterations time 0.002, Presolve 0.00
 Option for printingOptions changed from normal to all
 Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
 
@@ -52,37 +52,37 @@ Quarterly Loan (k_3): 0.00
 Quarter 4:
 Total Money (x_4): 0.00
 Cash Flow (c_4): -600.00
-Investment (i_4): 0.00
+Investment (i_4): 600.00
 6-Month Loan (j_4): -0.00
 Quarterly Loan (k_4): 0.00
 
 Quarter 5:
-Total Money (x_5): 496.37
+Total Money (x_5): 499.37
 Cash Flow (c_5): -500.00
-Investment (i_5): 496.37
+Investment (i_5): 999.37
 6-Month Loan (j_5): 0.00
 Quarterly Loan (k_5): 0.00
 
 Quarter 6:
-Total Money (x_6): 998.85
+Total Money (x_6): 1004.36
 Cash Flow (c_6): 200.00
-Investment (i_6): 798.85
+Investment (i_6): 804.36
 6-Month Loan (j_6): 0.00
 Quarterly Loan (k_6): 0.00
 
 Quarter 7:
-Total Money (x_7): 802.84
+Total Money (x_7): 808.39
 Cash Flow (c_7): 600.00
-Investment (i_7): 202.84
+Investment (i_7): 208.39
 6-Month Loan (j_7): 0.00
 Quarterly Loan (k_7): 0.00
 
 Quarter 8:
-Total Money (x_8): 203.86
+Total Money (x_8): 209.43
 Cash Flow (c_8): -900.00
-Investment (i_8): 203.86
+Investment (i_8): 1109.43
 6-Month Loan (j_8): 0.00
 Quarterly Loan (k_8): 0.00
 
-Total Money at Q9 (x_9): 1104.88
-Final Return (r): 457.86
+Total Money at Q9 (x_9): 1114.98
+Final Return (r): 467.95
