@@ -2,7 +2,7 @@ Welcome to the CBC MILP Solver
 Version: 2.10.3 
 Build Date: Dec 15 2019 
 
-command line - /home/harshit/anaconda3/envs/ml/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/7cb7be57996546458a7e4d2240a7f428-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /tmp/7cb7be57996546458a7e4d2240a7f428-pulp.sol (default strategy 1)
+command line - /home/harshit/anaconda3/envs/ml/lib/python3.12/site-packages/pulp/solverdir/cbc/linux/64/cbc /tmp/1ac58ba41bed402d82f7247c47b0b260-pulp.mps -max -timeMode elapsed -branch -printingOptions all -solution /tmp/1ac58ba41bed402d82f7247c47b0b260-pulp.sol (default strategy 1)
 At line 2 NAME          MODEL
 At line 3 ROWS
 At line 24 COLUMNS
@@ -12,14 +12,14 @@ At line 125 ENDATA
 Problem MODEL has 19 rows, 35 columns and 77 elements
 Coin0008I MODEL read with 0 errors
 Option for timeMode changed from cpu to elapsed
-Presolve 13 (-6) rows, 29 (-6) columns and 69 (-8) elements
-Perturbing problem by 0.001% of 3.8464207 - largest nonzero change 4.6390231e-05 ( 0.0082892611%) - largest zero change 4.510326e-05
-0  Obj -0.034716429 Primal inf 28177.196 (9) Dual inf 3.8464183 (1)
-0  Obj -0 Primal inf 28177.196 (9) Dual inf 7.8880719e+11 (14)
-18  Obj 457.85684
+Presolve 9 (-10) rows, 25 (-10) columns and 48 (-29) elements
+Perturbing problem by 0.001% of 1.0828567 - largest nonzero change 9.4873205e-07 ( 8.7613813e-05%) - largest zero change 8.6522632e-07
+0  Obj -0 Primal inf 3100 (7) Dual inf 0.99999815 (1)
+0  Obj -0 Primal inf 3100 (7) Dual inf 1.4198972e+11 (14)
+14  Obj 457.85684
 Optimal - objective value 457.85684
 After Postsolve, objective 457.85684, infeasibilities - dual 0 (0), primal 0 (0)
-Optimal objective 457.8568432 - 18 iterations time 0.002, Presolve 0.00
+Optimal objective 457.8568432 - 14 iterations time 0.002, Presolve 0.00
 Option for printingOptions changed from normal to all
 Total time (CPU seconds):       0.00   (Wallclock seconds):       0.00
 
@@ -53,7 +53,7 @@ Quarter 4:
 Total Money (x_4): 0.00
 Cash Flow (c_4): -600.00
 Investment (i_4): 0.00
-6-Month Loan (j_4): 0.00
+6-Month Loan (j_4): -0.00
 Quarterly Loan (k_4): 0.00
 
 Quarter 5:

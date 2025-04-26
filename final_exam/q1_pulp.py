@@ -108,9 +108,9 @@ lpp += j[8] == 0, "No_6month_Loan_Q8"
 # Investment constraints: can't invest more than what we have after meeting cash requirements
 for t in quarters:
     if cash_flow[t] >=0:
-        lpp += x[t] - i[t] >= cash_flow[t], f"Cash_Flow_Requirement_Q{t}"
+        lpp += x[t] - i[t] == cash_flow[t], f"Cash_Flow_Requirement_Q{t}"
     else:
-        lpp += i[t] <= x[t], f"Investment_Limit_Q{t}"
+        lpp += i[t] == x[t], f"Investment_Limit_Q{t}"
 
 # Solve the problem
 lpp.solve()
