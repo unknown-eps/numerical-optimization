@@ -17,5 +17,38 @@ cash_flow = [100, 500, 100, -600, -500, 200, 600, -900]
 # We already have non-negativity constraints for all decision variables.
 # The objective function is  x_9 - L_REPAY_FACTOR * L
 # The number of constraints are 17 without counting the non-negativity constraints.
-
-    
+L_start_idx = 0
+X_START_IDX = 1
+I_START_IDX = 10
+J_START_IDX = 18
+K_START_IDX = 25
+A = np.zeros((17, 33))
+b = np.zeros(17)
+for t in range(0,10):
+    cur_L_idx = L_start_idx
+    cur_x_idx = t + X_START_IDX
+    cur_i_idx = t + I_START_IDX
+    cur_j_idx = t + J_START_IDX
+    cur_k_idx = t + x_start_idx + 25
+    if t==0:
+        A[t, cur_x_idx] = -1
+        A[t, cur_L_idx] =  1
+        A[t, cur_j_idx] =  1
+        A[t, cur_k_idx] =  1
+        b[t] = 0
+    elif t==1:
+        A[t, cur_x_idx] = -1
+        A[t, cur_i_idx-1] = INTEREST_RATE
+        A[t, cur_k_idx-1] = -K_REPAY_FACTOR
+        A[t, cur_k_idx] = 1
+        A[t, cur_j_idx] = 1
+        b[t] = cash_flow[0]
+    elif t in range(2,8):
+        A[t, cur_x_idx] = -1
+        A[t, cur_i_idx-1] = INTEREST_RATE
+        A[t, cur_k_idx-1] = -K_REPAY_FACTOR
+        A[t, cur_j_idx-2] = -J_REPAY_FACTOR
+        A[t, cur_j_idx] = 1
+        A[t, cur_k_idx] = 1
+        b[t] = cash_flow[t-1]
+    elif 
