@@ -31,7 +31,8 @@ L_REPAY_FACTOR = (1+0.01)**8  # Repayment factor for 2-year loan
 
 # Investment and Cash Flow constraints
 # x_t - i_t = c_t for t = 1 to 8 (Cash after investment must cover net cash flow if ct is negative additional 
-# cash flow can be invested in the same quarter)
+# cash flow can be invested in the same quarter This forces that x[t]>=cashflow[t] is cashflow[t] is positive meaning we must 
+# have enough cash to cover the cashflow in the quarter where we need money)
 
 # Quarter-specific constraints (Balance Equations)
 # Let x[t], i[t], j[t], k[t] represent the variables for quarter t.
