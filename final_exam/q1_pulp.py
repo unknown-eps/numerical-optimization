@@ -1,3 +1,4 @@
+import pulp
 # My approach
 # Assumptions
 # - We pay compound interest with the principal at the end of the loan term
@@ -13,9 +14,9 @@
 # c_t: Cash flow in quarter t provided in the table (Technically c_t is not a decision variable as its values are provided) 
 # r: Final result (e.g., total return) to be maximized
 ## Constants
-INTEREST_RATE = 0.005  # Interest rate for investment
-K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
-J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
+#INTEREST_RATE = 0.005  # Interest rate for investment
+#K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
+#J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
 # Constraints
 
 # Cash flow values (c_t) - Negative means outflow, Positive means inflow
@@ -71,7 +72,6 @@ J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
 # Maximize r = x[9] - L_REPAY_FACTOR * L
 # (Maximize the cash at the start of quarter 9 after repaying the initial two-year loan L with interest)
 
-import pulp
 
 # Create the LP problem
 lpp = pulp.LpProblem("Cash_Flow_Management", pulp.LpMaximize)
