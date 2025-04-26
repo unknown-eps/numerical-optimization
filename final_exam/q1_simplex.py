@@ -57,3 +57,7 @@ for idx in range(9, 17):
         A[idx, cur_x_idx] = 1
         A[idx, cur_i_idx] = -1
         b[idx] = 0
+print(f"Rank of the matrix A: {np.linalg.matrix_rank(A)}") # Rank of the matrix A: 17
+c = np.zeros(33)
+c[L_start_idx] = -L_REPAY_FACTOR
+c[X_START_IDX + 8] = 1
