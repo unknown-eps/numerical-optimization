@@ -12,7 +12,10 @@
 # k_t: 4-month loan available at the beginning of each quarter t    
 # c_t: Cash flow in quarter t provided in the table (Technically c_t is not a decision variable as its values are provided) 
 # r: Final result (e.g., total return) to be maximized
-
+## Constants
+INTEREST_RATE = 0.005  # Interest rate for investment
+K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
+J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
 # Constraints
 
 # Cash flow values (c_t) - Negative means outflow, Positive means inflow
