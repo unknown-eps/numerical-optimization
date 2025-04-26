@@ -115,8 +115,4 @@ print(f"Solution by direct solve has the optimal value: {obj_val:.2f}")
 basic_vars, res = find_basic_vars_explicit(A, b)
 print(f"Basic variables: {basic_vars}")
 print(f"len(basic_vars): {len(basic_vars)}")
-basic_vars.append(31)
-B = A[:, basic_vars]
-print(f"Rank of the matrix B: {np.linalg.matrix_rank(B)}") # Rank of the matrix B: 17 Full row rank
-xb = np.linalg.solve(B, b)
-print(f"xb: {xb}")
+basic_vars.append(31) # This was chosen through hit and trial so that the matrix is full rank 
