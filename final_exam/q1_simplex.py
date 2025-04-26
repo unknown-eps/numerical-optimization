@@ -24,31 +24,36 @@ J_START_IDX = 18
 K_START_IDX = 25
 A = np.zeros((17, 33))
 b = np.zeros(17)
-for t in range(0,10):
+for t in range(0,9):
     cur_L_idx = L_start_idx
     cur_x_idx = t + X_START_IDX
     cur_i_idx = t + I_START_IDX
     cur_j_idx = t + J_START_IDX
-    cur_k_idx = t + x_start_idx + 25
+    cur_k_idx = t + K_START_IDX
+    A[t, cur_x_idx] = -1
     if t==0:
-        A[t, cur_x_idx] = -1
-        A[t, cur_L_idx] =  1
-        A[t, cur_j_idx] =  1
-        A[t, cur_k_idx] =  1
-        b[t] = 0
-    elif t==1:
-        A[t, cur_x_idx] = -1
+        A[t, cur_L_idx] = 1
+    if t not in [7,8]: # # No 6-month loan taken at start of Q8 and while calculating x[9]
+        A[t, cur_j_idx] = 1
+    if t!=8: ## No 4-month loan caculation at start of Q9
+        A[t, cur_k_idx] = 1
+    if t>0:
+        A[t, cur_x_idx-1] = 1
         A[t, cur_i_idx-1] = INTEREST_RATE
         A[t, cur_k_idx-1] = -K_REPAY_FACTOR
-        A[t, cur_k_idx] = 1
-        A[t, cur_j_idx] = 1
-        b[t] = cash_flow[0]
-    elif t in range(2,8):
-        A[t, cur_x_idx] = -1
-        A[t, cur_i_idx-1] = INTEREST_RATE
-        A[t, cur_k_idx-1] = -K_REPAY_FACTOR
-        A[t, cur_j_idx-2] = -J_REPAY_FACTOR
-        A[t, cur_j_idx] = 1
-        A[t, cur_k_idx] = 1
+        if t>1:
+            A[t, cur_j_idx-2] = -J_REPAY_FACTOR
         b[t] = cash_flow[t-1]
-    elif 
+        
+for idx in range(9, 17):
+    t = idx - 9
+    cur_i_idx = t + I_START_IDX
+    cur_x_idx = t + X_START_IDX
+    if cash_flow[t] >=0:
+        A[idx, cur_x_idx] = 1
+        A[idx, cur_i_idx] = -1
+        b[idx] = cash_flow[t]
+    else:
+        A[idx, cur_x_idx] = 1
+        A[idx, cur_i_idx] = -1
+        b[idx] = 0
