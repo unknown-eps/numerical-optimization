@@ -14,9 +14,9 @@ import pulp
 # c_t: Cash flow in quarter t provided in the table (Technically c_t is not a decision variable as its values are provided) 
 # r: Final result (e.g., total return) to be maximized
 ## Constants
-#INTEREST_RATE = 0.005  # Interest rate for investment
-#K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
-#J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
+INTEREST_RATE = 0.005  # Interest rate for investment
+K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
+J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
 # Constraints
 
 # Cash flow values (c_t) - Negative means outflow, Positive means inflow
@@ -96,14 +96,14 @@ lpp += r == x[9] - (1 + 0.01) ** 8 * L, "Final_Return_Constraint"
 
 # Quarter 1 constraints
 lpp += x[1] == L + j[1] + k[1], "Q1_Money_Balance"
-lpp += x[2] == x[1] - cash_flow[1] + 0.005 * i[1] - 1.025 * k[1] + j[2] + k[2], "Q1_to_Q2_Balance"
+lpp += x[2] == x[1] - cash_flow[1] + INTEREST_RATE * i[1] - K_REPAY_FACTOR * k[1] + j[2] + k[2], "Q1_to_Q2_Balance"
 
 # Constraints for quarters 2 to 7
 for t in range(2, 8):
-    lpp += x[t+1] == x[t] - cash_flow[t] + 0.005 * i[t] - 1.025 * k[t] - (1 + 0.018)**2 * j[t-1] + j[t+1] + k[t+1], f"Q{t}_to_Q{t+1}_Balance"
+    lpp += x[t+1] == x[t] - cash_flow[t] + INTEREST_RATE * i[t] - K_REPAY_FACTOR * k[t] - J_REPAY_FACTOR * j[t-1] + j[t+1] + k[t+1], f"Q{t}_to_Q{t+1}_Balance"
 
 # Constraint for quarter 8
-lpp += x[9] == x[8] - cash_flow[8] + 0.005 * i[8] - 1.025 * k[8] - (1 + 0.018)**2 * j[7], "Q8_to_Q9_Balance"
+lpp += x[9] == x[8] - cash_flow[8] + INTEREST_RATE * i[8] - K_REPAY_FACTOR * k[8] - J_REPAY_FACTOR * j[7], "Q8_to_Q9_Balance"
 
 # No 6-month loan in final quarter
 lpp += j[8] == 0, "No_6month_Loan_Q8"
