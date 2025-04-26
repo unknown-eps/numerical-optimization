@@ -17,6 +17,7 @@ import pulp
 INTEREST_RATE = 0.005  # Interest rate for investment
 K_REPAY_FACTOR = 1.025  # Repayment factor for 4-month loan
 J_REPAY_FACTOR = (1+0.018)**2  # Repayment factor for 6-month loan
+L_REPAY_FACTOR = (1+0.01)**8  # Repayment factor for 2-year loan
 # Constraints
 
 # Cash flow values (c_t) - Negative means outflow, Positive means inflow
@@ -92,7 +93,7 @@ r = pulp.LpVariable("r")  # Final return to be maximized
 lpp += r, "Maximize_Wealth"
 
 # Constraint for r (final return)
-lpp += r == x[9] - (1 + 0.01) ** 8 * L, "Final_Return_Constraint"
+lpp += r == x[9] - L_REPAY_FACTOR * L, "Final_Return_Constraint"
 
 # Quarter 1 constraints
 lpp += x[1] == L + j[1] + k[1], "Q1_Money_Balance"
