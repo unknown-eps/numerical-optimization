@@ -1,2 +1,2 @@
 # numerical-optimization
-# Removed Changes   
+## Repositry for the in class codes and exams done for numerical optimization
